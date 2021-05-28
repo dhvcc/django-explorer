@@ -3,6 +3,32 @@ name = "demo_app"
 version = "0.1.0"
 description = ""
 authors = ["dhvcc <1337kwiz@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/dhvcc/django_explorer"
+repository = "https://github.com/dhvcc/django_explorer"
+keywords = ["django", "python3", "directory", "serving", "diretory-listing"]
+classifiers = [
+    "Environment :: Plugins",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: JavaScript",
+    "Framework :: Django",
+    "Framework :: Django :: 3.0",
+    "Framework :: Django :: 3.1",
+    "Framework :: Django :: 3.2",
+    "Topic :: Software Development :: Libraries",
+    "Typing :: Typed",
+]
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/dhvcc/django_explorer/issues"
+
 
 [tool.poetry.dependencies]
 python = "^3.8"
