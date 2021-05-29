@@ -5,6 +5,7 @@ description = "Serve local direcotry listing from django"
 authors = ["dhvcc <1337kwiz@gmail.com>"]
 license = "GPLv3"
 include = ["LICENSE", "README.md"]
+exclude = ["**/tests/*"]
 readme = "README.md"
 homepage = "https://github.com/dhvcc/django_explorer"
 repository = "https://github.com/dhvcc/django_explorer"
