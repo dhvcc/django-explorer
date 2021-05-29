@@ -2,8 +2,6 @@
 
 Serve local direcotry listing from your django app
 
-TODO: context type with field mapping constants
-
 ## Demo app
 
 1. Install dependencies `poetry install`
@@ -13,9 +11,9 @@ TODO: context type with field mapping constants
 
 ### Plain
 
-http://localhost:8000/
-![image](https://user-images.githubusercontent.com/18076967/120069309-f2b80500-c08d-11eb-9787-ace12a3979ed.png)
-http://localhost:8000/nested_folder
-![image](https://user-images.githubusercontent.com/18076967/120069313-f9df1300-c08d-11eb-9b4a-52ea8d5fb079.png)
-http://localhost:8000/index_file.md
-![image](https://user-images.githubusercontent.com/18076967/120069323-0d8a7980-c08e-11eb-85b6-21dff6619aa2.png)
+`http://localhost:8000/`
+![image](https://user-images.githubusercontent.com/18076967/120086128-1c9d1600-c0e6-11eb-8535-2948179829a5.png)
+`http://localhost:8000/nested_dir`
+![image](https://user-images.githubusercontent.com/18076967/120086149-30e11300-c0e6-11eb-9a31-dbbd4b1155a1.png)
+`http://localhost:8000/lorem_ipsum.md`
+![image](https://user-images.githubusercontent.com/18076967/120086173-5837e000-c0e6-11eb-9176-ffc2df59a0ff.png)

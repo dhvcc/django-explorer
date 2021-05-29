@@ -1,7 +1,8 @@
 from pathlib import Path
 from typing import List, Optional, Union
 
-from django.urls import include, path
+from django.urls import include
+from django.urls.conf import re_path
 from django.urls.resolvers import URLPattern
 
 from django_explorer import themes
@@ -17,7 +18,7 @@ def get_directory_view(root: Path, directory_name: Optional[str]):
 
     directory_name = directory_name or root.name
 
-    def directory_view(request, relative: str = ""):
+    def directory_view(request, relative: str):
         current = root / relative
 
         if current.is_file():
@@ -46,15 +47,6 @@ def explore(
         raise ValueError("root_path argument should be a directory")
 
     urlpatterns = [
-        path(
-            "",
-            get_directory_view(root, directory_name),
-            name=reverse_name + "_root",
-        ),
-        path(
-            "<str:relative>",
-            get_directory_view(root, directory_name),
-            name=reverse_name,
-        ),
+        re_path(r"(?P<relative>.*)", get_directory_view(root, directory_name), name=reverse_name),
     ]
     return include(urlpatterns)

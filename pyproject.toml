@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-explorer"
-version = "0.2.0"
+version = "0.2.1"
 description = "Serve local direcotry listing from django"
 authors = ["dhvcc <1337kwiz@gmail.com>"]
 license = "GPLv3"
@@ -47,6 +47,7 @@ pytest = "^6.2.4"
 django-extensions = "^3.1.3"
 pytest-django = "^4.3.0"
 pre-commit = "^2.13.0"
+autoflake = "^1.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

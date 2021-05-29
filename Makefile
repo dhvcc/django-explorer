@@ -22,22 +22,21 @@ help:
 # Project #
 ###########
 
-interpreter_found := $(shell [ -n "$$VIRTUAL_ENV" ] && echo "yes")
-
-
+interpreter := $(shell poetry env info > /dev/null 2>&1 && echo "poetry run")
+project_version = $(shell poetry version | cut -d' ' -f2)
 
 check-venv:
-	$(if $(interpreter_found),, $(error No virtual environment found, either run "make venv" or "poetry shell"))
+	$(if $(interpreter),, $(error No virtual environment found, run "make venv"))
 
 githooks: ## Install git hooks
-	@pre-commit install -t=pre-commit -t=pre-push
+	@$(interpreter) pre-commit install -t=pre-commit -t=pre-push
 
 run_demo_app: ## Build local version and run demo_app
 	@poetry build
 
 	@cd demo_app
-	@poetry run pip install ../dist/django_explorer-*.*.*-py3-none-any.whl --force-reinstall
-	@poetry run ./manage.py runserver $(port)
+	@$(interpreter) pip install ../dist/django_explorer-$(project_version)-py3-none-any.whl --force-reinstall
+	@$(interpreter) ./manage.py runserver $(port)
 
 
 ###############
@@ -47,30 +46,31 @@ run_demo_app: ## Build local version and run demo_app
 check: check-venv ## Run linters
 	@printf "$(CYAN)flake8$(COFF)\n"
 	@echo "======"
-	@flake8 || exit 1
+	@$(interpreter) flake8 || exit 1
 	@echo "OK"
 	@echo;
 	@printf "$(CYAN)black$(COFF)\n"
 	@echo "======"
-	@black --check . || exit 1
+	@$(interpreter) black --check . || exit 1
 	@echo;
 	@printf "$(CYAN)isort$(COFF)\n"
 	@echo "======"
-	@isort --check-only .
+	@$(interpreter) isort --check-only .
 
 test: check-venv ## Test code with pytest
 	@printf "$(CYAN)pytest$(COFF)\n"
 	@echo "========="
-	@pytest .
+	@$(interpreter) pytest .
 
 fix: check-venv ## Run code formatters
 	@printf "$(CYAN)autoflake$(COFF)\n"
 	@echo "========="
-	@autoflake -ri --remove-all-unused-imports --exclude __init__.py,conftest.py .
+	@$(interpreter) autoflake -ri --remove-all-unused-imports --exclude __init__.py,conftest.py .
+	@echo ;
 	@printf "$(CYAN)black$(COFF)\n"
 	@echo "====="
-	@black .
+	@$(interpreter) black .
 	@echo;
 	@printf "$(CYAN)isort$(COFF)\n"
 	@echo "====="
-	@isort .
+	@$(interpreter) isort .

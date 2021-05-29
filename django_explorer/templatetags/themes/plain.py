@@ -2,24 +2,30 @@ from pathlib import Path
 
 from django_explorer.templatetags.django_explorer import register
 from django_explorer.templatetags.utils import sizeof_fmt
+from django_explorer.types import TemplateContext
 
 
 @register.simple_tag(takes_context=True)
-def explorer_path(context: dict) -> str:
-    relative = context["current"].relative_to(context["root"])
-    path = (context["root"].parts[-1],) + relative.parts
-    return "/".join(path)
+@TemplateContext.validate
+def explorer_path(context: TemplateContext) -> str:
+    relative = context.current.relative_to(context.root)
+    paths = (context.root.parts[-1],) + relative.parts
+    return "/".join(paths)
 
 
 @register.simple_tag(takes_context=True)
-def can_go_back(context: dict) -> bool:
-    relative = context["current"].relative_to(context["root"])
+@TemplateContext.validate
+def can_go_back(context: TemplateContext) -> bool:
+    relative = context.current.relative_to(context.root)
     return bool(relative.parts)
 
 
-@register.simple_tag
-def file_href(file: Path) -> str:
-    return f"href={file.parts[-1]}"
+@register.simple_tag(takes_context=True)
+@TemplateContext.validate
+def file_href(context: TemplateContext, file: Path) -> str:
+    request = context.request
+    paths = [request.path.lstrip("/"), file.parts[-1]]
+    return "href={}".format("/".join(paths))
 
 
 @register.simple_tag
