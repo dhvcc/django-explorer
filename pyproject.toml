@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-explorer"
-version = "0.1.0"
+version = "0.2.0"
 description = "Serve local direcotry listing from django"
 authors = ["dhvcc <1337kwiz@gmail.com>"]
 license = "GPLv3"
@@ -34,12 +34,16 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.6.2,<4"
 django = "^3"
+python-magic = "^0.4.22"
+pydantic = "^1.8.2"
+ipython = { version = "^7.0.0", python = ">=3.7" }
 
 [tool.poetry.dev-dependencies]
 black = "^21.5b1"
 isort = "^5.8.0"
 flake8 = "^3.9.2"
 pytest = "^6.2.4"
+django-extensions = "^3.1.3"
 pytest-django = "^4.3.0"
 pre-commit = "^2.13.0"
 

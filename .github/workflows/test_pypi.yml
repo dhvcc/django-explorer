@@ -3,7 +3,7 @@ name: Publish Package to TestPyPI with poetry
 on:
   push:
     tags:
-      - 'TEST_PYPI*'
+      - 'test_v*'
 
 jobs:
   build-and-test-publish:

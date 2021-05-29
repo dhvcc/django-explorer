@@ -24,21 +24,19 @@ help:
 
 interpreter_found := $(shell [ -n "$$VIRTUAL_ENV" ] && echo "yes")
 
+
+
 check-venv:
 	$(if $(interpreter_found),, $(error No virtual environment found, either run "make venv" or "poetry shell"))
 
 githooks: ## Install git hooks
 	@pre-commit install -t=pre-commit -t=pre-push
 
-init_demo_app: ## Install dependencies for demo_app
-	@cd demo_app
-	@poetry install
-
 run_demo_app: ## Build local version and run demo_app
 	@poetry build
 
 	@cd demo_app
-	@poetry run -m pip install ../dist/django_explorer-*.*.*-py3-none-any.whl --force-reinstall
+	@poetry run pip install ../dist/django_explorer-*.*.*-py3-none-any.whl --force-reinstall
 	@poetry run ./manage.py runserver $(port)
 
 
