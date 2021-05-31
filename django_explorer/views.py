@@ -51,8 +51,6 @@ class BaseExplorerView(View):
         return include(urlpatterns)
 
     def get(self, request, relative: str):
-        # print(f"inspect")
-        # inspect(self, methods=True)
         for permission in self.permissions:
             valid_user = permission(self.request.user)
             if not valid_user:

@@ -39,6 +39,10 @@ run_demo_app: ## Build local version and run demo_app
 	@$(interpreter) ./manage.py migrate --noinput
 	@$(interpreter) ./manage.py runserver $(port)
 
+run_demo_shell: ## Run django-extension's shell_plus for demo_app
+	@$(interpreter) pip install ./manage.py shell_plus --ipython -- -i -c """from rich import pretty, inspect
+	pretty.install()
+	"""
 
 ###############
 # Code checks #
