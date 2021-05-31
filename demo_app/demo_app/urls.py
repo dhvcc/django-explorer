@@ -1,8 +1,7 @@
-from django.conf import settings
-from django.urls import path
-
-from django_explorer.views import BaseExplorerView
+from django.contrib import admin
+from django.urls import include, path
 
 urlpatterns = [
-    path("", BaseExplorerView(root=settings.BASE_DIR / "data_dir")),
+    path("admin", admin.site.urls),
+    path("", include("serve.urls")),
 ]

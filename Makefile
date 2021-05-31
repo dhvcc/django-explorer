@@ -36,6 +36,7 @@ run_demo_app: ## Build local version and run demo_app
 
 	@cd demo_app
 	@$(interpreter) pip install ../dist/django_explorer-$(project_version)-py3-none-any.whl --force-reinstall
+	@$(interpreter) ./manage.py migrate --noinput
 	@$(interpreter) ./manage.py runserver $(port)
 
 

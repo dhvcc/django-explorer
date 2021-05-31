@@ -1,1 +1,1 @@
-from .explore import explore
+from .views import PlainExplorerView

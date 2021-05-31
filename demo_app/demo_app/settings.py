@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     ###################
     "django_extensions",  # use django_extensions to run ./manage.py show_urls
     "django_explorer",  # add django_explorer to allow template rendering
+    "serve",
     ###################
 ]
 
