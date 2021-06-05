@@ -9,13 +9,6 @@ from pydantic import BaseModel
 from django_explorer.utils import format_byte_size
 
 
-class ExplorerSettings(BaseModel):
-    DEFAULT_GLOB: str = "*"
-
-    class Config:
-        use_enum_values = True
-
-
 class ExplorerFile(BaseModel):
     path: Path
     type: Literal["file", "directory"]

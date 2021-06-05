@@ -1,5 +1,5 @@
 import os
-from typing import Callable, List, Optional, Sequence
+from typing import Callable, List, Optional
 
 import magic
 from django.conf.urls import include
@@ -14,11 +14,11 @@ from django_explorer.types import ExplorerContext, ExplorerFile
 
 class BaseExplorerView(View):
     http_method_names = ("get",)
-    fields = "__all__"
 
     root: str = ""
     permissions: List[Callable] = []  # TODO: DRF compatible
-    filters: List[Callable] = []
+    # fields = "__all__"  # TODO
+    # filters: List[Callable] = []  # TODO
 
     go_back_url: Optional[str] = None
     glob: str = "*"
@@ -52,13 +52,13 @@ class BaseExplorerView(View):
 
     def get(self, request, relative: str):
         for permission in self.permissions:
+            # Need to document this stuff and add example
             valid_user = permission(self.request.user)
             if not valid_user:
                 return HttpResponse(status=403)
 
         context = ExplorerContext.from_relative(self.root, relative)
 
-        print(context.current, context.current.exists())
         if not context.current.exists():
             return self.fallback("Path does not exist", 404)
 
@@ -135,11 +135,6 @@ class BaseExplorerView(View):
             file=context.relative,
         )
         return response
-
-    def get_fields(self) -> Sequence[str]:
-        if self.fields == "__all__":
-            return ("fname", "size", "download")
-        return self.fields
 
 
 class PlainExplorerView(BaseExplorerView):
